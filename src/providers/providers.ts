@@ -1,11 +1,11 @@
 import { User } from './user';
 import { Api } from './api';
 import { Settings } from './settings';
-import { Items } from '../mocks/providers/items';
+import { ItemService } from './database/items';
 
 export {
-User,
-Api,
-Settings,
-Items
+    User,
+    Api,
+    Settings,
+    ItemService
 };

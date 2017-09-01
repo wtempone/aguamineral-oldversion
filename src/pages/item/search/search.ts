@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { ItemDetailPage } from '../item-detail/item-detail';
+import { ItemDetailPage } from '../../item/item-detail/item-detail';
 
-import { Item } from '../../models/item';
+import { Item } from '../../../models/database/item';
 
-import { Items } from '../../providers/providers';
-
+import { ItemService } from '../../../providers/database-providers';
 
 @Component({
   selector: 'page-search',
@@ -16,7 +15,7 @@ export class SearchPage {
   
   currentItems: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams, public items: ItemService) { }
 
   /**
    * Perform a service for the proper items.
@@ -27,8 +26,8 @@ export class SearchPage {
       this.currentItems = [];
       return;
     }
-    this.currentItems = this.items.query({
-      name: val
+    this.currentItems = this.items.getItemsList({
+      title: val
     });
   }
 
