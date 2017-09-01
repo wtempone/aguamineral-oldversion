@@ -5,6 +5,7 @@ import { ItemDetailPage } from '../../item/item-detail/item-detail';
 
 import { Item } from '../../../models/database/item';
 
+import { FirebaseListObservable } from 'angularfire2/database';
 import { ItemService } from '../../../providers/database-providers';
 
 @Component({
@@ -13,9 +14,9 @@ import { ItemService } from '../../../providers/database-providers';
 })
 export class SearchPage {
   
-  currentItems: any = [];
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public items: ItemService) { }
+  public items: FirebaseListObservable<Item[]>;
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, public itemService: ItemService) { }
 
   /**
    * Perform a service for the proper items.
@@ -23,12 +24,16 @@ export class SearchPage {
   getItems(ev) {
     let val = ev.target.value;
     if (!val || !val.trim()) {
-      this.currentItems = [];
-      return;
+      this.items = this.itemService.getList({
+        orderByChild: 'name',
+        startAt: val        
+      });
+        return;
     }
-    this.currentItems = this.items.getItemsList({
-      title: val
-    });
+    this.items = this.itemService.getList({
+      orderByChild: 'name',
+      startAt: val        
+  });
   }
 
   /**

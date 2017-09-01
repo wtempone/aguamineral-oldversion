@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { NavController, ViewController } from 'ionic-angular';
+import { NavController, ViewController, NavParams } from 'ionic-angular';
+import { Item } from '../../../models/database/item';
+import { ItemService } from '../../../providers/database/items';
 
 import { Camera } from '@ionic-native/camera';
 
@@ -14,17 +16,23 @@ export class ItemCreatePage {
 
   isReadyToSave: boolean;
 
-  item: any;
+  item: Item;
+  update: boolean;
 
   form: FormGroup;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
-    this.form = formBuilder.group({
-      profilePic: [''],
-      name: ['', Validators.required],
-      about: ['']
-    });
-
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, public itemService: ItemService,  navParams: NavParams) {
+    if (navParams.get('item')) {
+      this.form = formBuilder.group(navParams.get('item'));
+      this.isReadyToSave = this.form.valid;
+      this.update = true;
+    } else {
+      this.form = formBuilder.group({
+        profilePic: [''],
+        name: ['', Validators.required],
+        about: ['']
+      });      
+    }
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
@@ -66,17 +74,10 @@ export class ItemCreatePage {
     return 'url(' + this.form.controls['profilePic'].value + ')'
   }
 
-  /**
-   * The user cancelled, so we dismiss without sending data back.
-   */
   cancel() {
     this.viewCtrl.dismiss();
   }
 
-  /**
-   * The user is done and wants to create the item, so return it
-   * back to the presenter.
-   */
   done() {
     if (!this.form.valid) { return; }
     this.viewCtrl.dismiss(this.form.value);

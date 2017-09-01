@@ -20,7 +20,7 @@ export class ListMasterPage {
   }
 
   ngOnInit() {
-    this.items = this.itemSvc.getItemsList({limitToLast: 5})
+    this.items = this.itemSvc.getList({limitToLast: 5})
   }
 
   ionViewDidLoad() {
@@ -30,19 +30,23 @@ export class ListMasterPage {
     let addModal = this.modalCtrl.create(ItemCreatePage);
     addModal.onDidDismiss(item => {
       if (item) {
-        this.itemSvc.createItem(item);
+        this.itemSvc.create(item);
       }
     })
     addModal.present();
   }
 
   deleteItem(item) {
-    this.itemSvc.deleteItem(item);
+    this.itemSvc.delete(item);
   }
 
-  openItem(item: Item) {
-    this.navCtrl.push(ItemDetailPage, {
-      item: item
-    });
+  openItem(itemDB: Item) {
+    let addModal = this.modalCtrl.create(ItemCreatePage, { item: itemDB });
+    addModal.onDidDismiss(item => {
+      if (item) {
+        this.itemSvc.update(itemDB.$key, item);
+      }
+    })
+    addModal.present();  
   }
 }
