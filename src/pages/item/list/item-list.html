@@ -1,19 +1,25 @@
+
 <ion-header>
 
   <ion-navbar>
     <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>
-
     <ion-buttons end>
+     
+      <button ion-button icon-only (click)="toggleSearch()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+     
       <button ion-button icon-only (click)="addItem()">
         <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>
+      </button>      
+   
+    </ion-buttons> 
   </ion-navbar>
 
 </ion-header>
 
 <ion-content>
-
+  <ion-searchbar [hidden]="!searchVisible" (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>  
   <ion-list>
     <ion-item-sliding  *ngFor="let item of items | async">
       <button ion-item (click)="openItem(item)">

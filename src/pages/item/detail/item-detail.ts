@@ -1,18 +1,19 @@
 import { Component, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, ViewController, NavParams } from 'ionic-angular';
-import { Item } from '../../../models/database/item';
-import { ItemService } from '../../../providers/database/items';
+
+import { Item } from '../../../providers/database/database-providers';
+import { ItemService } from '../../../providers/database/database-providers';
 
 import { Camera } from '@ionic-native/camera';
 
 
 @Component({
-  selector: 'page-item-create',
-  templateUrl: 'item-create.html'
+  selector: 'page-item-detail', 
+  templateUrl: 'item-detail.html'
 })
-export class ItemCreatePage {
-  @ViewChild('fileInput') fileInput;
+export class ItemDetailPage {
+  @ViewChild('fileInput') fileInput; 
 
   isReadyToSave: boolean;
 
@@ -24,6 +25,7 @@ export class ItemCreatePage {
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, public itemService: ItemService,  navParams: NavParams) {
     if (navParams.get('item')) {
       this.form = formBuilder.group(navParams.get('item'));
+      this.item = navParams.get('item');
       this.isReadyToSave = this.form.valid;
       this.update = true;
     } else {
@@ -45,15 +47,24 @@ export class ItemCreatePage {
 
   getPicture() {
     if (Camera['installed']()) {
+
+
       this.camera.getPicture({
-        destinationType: this.camera.DestinationType.DATA_URL,
-        targetWidth: 96,
-        targetHeight: 96
+        quality : 75, 
+        destinationType : this.camera.DestinationType.DATA_URL, 
+        sourceType : this.camera.PictureSourceType.CAMERA, 
+        allowEdit : true,
+        encodingType: this.camera.EncodingType.JPEG,
+        targetWidth: 900,
+        targetHeight: 900,
+        saveToPhotoAlbum: false
       }).then((data) => {
         this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
       }, (err) => {
         alert('Unable to take photo');
       })
+
+      
     } else {
       this.fileInput.nativeElement.click();
     }

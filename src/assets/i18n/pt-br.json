@@ -1,13 +1,23 @@
 {
   "BACK_BUTTON_TEXT" : "Voltar",
-
+  "CLOSE_BUTTON_TEXT" : "Fechar",
+  "OK_BUTTON_TEXT" : "Ok",
+  
   "NAME": "Nome",
+  "NAME_PLACEHOLDER": "Digite seu nome",
+  
   "EMAIL": "Email",
+  "EMAIL_PLACEHOLDER": "Digite seu email",
   "USERNAME": "Nome de Usuário",
   "PASSWORD": "Senha",
+  "PASSWORD_PLACEHOLDER": "Digite sua senha",
   "LOGIN": "Entrar",
+  "LOGIN_WHIT_FACEBOOK": "Entrar com facebook",
   "SIGNUP": "Cadastre-se",
-
+  "FORGOT_PASSWORD": "Esqueceu sua senha?",
+  "RESET_PASSWORD": "Recuperar senha",
+  "RESET_PASSWORD_SENT": "Enviar e-mail",
+  
   "TAB1_TITLE": "Itens",
   "TAB2_TITLE": "Busca",
   "TAB3_TITLE": "Configurações",
@@ -64,5 +74,21 @@
   "CARDS_TITLE": "Social",
 
   "SEARCH_TITLE": "Busca",
-  "SEARCH_PLACEHOLDER" : "Procure um item da lista, ex: \"Donald Duck\""
+  "SEARCH_PLACEHOLDER" : "Procure um item da lista, ex: \"Donald Duck\"",
+
+  "PASSWORD_MESSAGE_INVALID": "Sua senha precisa ter no mínimo 8 caracteres",
+  "EMAIL_MESSAGE_INVALID": "Digite um e-mail válido",  
+
+  "AUTH_INVALID_EMAIL": "E-mail inválido.",
+  "AUTH_USER_DISABLED": "Usuário não está ativo.",
+  "AUTH_USER_NOT_FOUND": "Usuário não encontrado. Efetue seu cadastro.",
+  "AUTH_USER_NOT_FOUND_RESET": "Usuário não encontrado.",
+  "AUTH_WRONG_PASSWORD": "Senha inválida",
+
+  "AUTH_EMAIL_ALREADY_IN_USE" : "Já existe um usuário cadastrado para este e-mail.",
+  "AUTH_OPERATION_NOT_ALLOWED" : "Cadastro não autorizado, verifique as regras de utilização de e-mail para este aplicativo",
+  "AUTH_WEAK_PASSWORD": "Redefina sua senha, a senha informada foi considerada muito fraca.",
+  
+  "AUTH_SUCCESS_SIGNIN": "Seu cadastro foi realizado com sucesso.",
+  "AUTH_SUCCESS_RESET_PASSWORD": "Uma mensagem de redefinição de senha será enviada ao seu endereço de e-mail para recuperação."
 }

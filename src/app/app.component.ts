@@ -5,11 +5,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { FirstRunPage } from '../pages/pages';
-import { ListMasterPage } from '../pages/item/list-master/list-master';
+import { ItemListPage } from '../pages/item/list/item-list'; 
 import { LoginPage } from '../pages/login/login';
 import { MenuPage } from '../pages/menu/menu';
 import { ContentPage } from '../pages/content/content';
-import { SearchPage } from '../pages/item/search/search';
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
@@ -51,9 +50,8 @@ export class MyApp {
     { title: 'Tabs', component: TabsPage },
     { title: 'Login', component: LoginPage },
     { title: 'Signup', component: SignupPage },
-    { title: 'Master Detail', component: ListMasterPage },
+    { title: 'Master Detail', component: ItemListPage },
     { title: 'Menu', component: MenuPage },
-    { title: 'Search', component: SearchPage },
     { title: 'Settings', component: SettingsPage }
     
   ]
@@ -76,7 +74,7 @@ export class MyApp {
     this.translate.setDefaultLang('pt-br');
 
     if (this.translate.getBrowserLang() !== undefined) {
-      this.translate.use(this.translate.getBrowserLang());
+      this.translate.use(this.translate.getBrowserLang() == 'pt' ? 'pt-br' : this.translate.getBrowserLang());
     } else {
       this.translate.use('pt-br'); // Set your language here
     }

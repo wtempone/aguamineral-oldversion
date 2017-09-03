@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { AngularFireModule } from 'angularfire2';
 import { FirebaseListObservable, FirebaseObjectObservable, AngularFireDatabase } from "angularfire2/database";
 
-import { Item } from '../../models/database/item';
+import { Item } from '../database-providers';
+
 @Injectable()
 export class ItemService {
   private basePath: string = '/items';
   items: FirebaseListObservable<Item[]> = null; //  list of objects
   item: FirebaseObjectObservable<Item> = null; //   single object
 
-  constructor(private af: AngularFireModule,
-              private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) { }
               
     getList(query={}): FirebaseListObservable<Item[]> {
       this.items = this.db.list(this.basePath, { query: query });

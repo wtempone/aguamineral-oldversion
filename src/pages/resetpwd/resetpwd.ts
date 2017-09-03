@@ -1,75 +1,66 @@
+import { TranslateService } from '@ngx-translate/core';
+import { AuthServiceProvider } from './../../providers/auth-service';
+import { LoginPage } from './../login/login';
 import { Component } from '@angular/core';
 import { NavController, AlertController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { MainPage } from '../../pages/pages';
-
-import { TranslateService } from '@ngx-translate/core';
-
-import { AuthServiceProvider } from '../../providers/auth-service';
-
-import { WelcomePage } from './../welcome/welcome';
-import { SignupPage } from '../signup/signup';
-import { ResetpwdPage } from '../resetpwd/resetpwd';
-
 /*
-  Generated class for the Login page.
+  Generated class for the Resetpwd page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html'
+  selector: 'page-resetpwd',
+  templateUrl: 'resetpwd.html'
 })
-export class LoginPage {
+export class ResetpwdPage {
 
-  public loginForm;
+  public resetpwdForm;
   emailChanged: boolean = false;
-  passwordChanged: boolean = false;
   submitAttempt: boolean = false;
   loading: any;
 
-  constructor(public navCtrl: NavController,
-    public authService: AuthServiceProvider,
-    public navParams: NavParams,
+  constructor(public navCtrl: NavController, 
+    public authService: AuthServiceProvider, 
+    public navParams: NavParams, 
     public formBuilder: FormBuilder,
-    public alertCtrl: AlertController,
+    public alertCtrl: AlertController, 
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,    
     public translate: TranslateService) {
-
     let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
-
-    this.loginForm = this.formBuilder.group({
-      email: ['', Validators.compose([Validators.required, Validators.pattern(EMAIL_REGEXP)])],
-      password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+    this.resetpwdForm = formBuilder.group({
+      email: ['', Validators.compose([Validators.required, Validators.pattern(EMAIL_REGEXP)])]
     });
-  }
-  register(){
-    this.navCtrl.push(SignupPage);
   }
 
   resetPwd() {
-    this.navCtrl.push(ResetpwdPage);
-  }
-  facebookLogin() {
-    this.authService.signInWithFacebook();
-      
-  }
-  loginUser() {
-    this.submitAttempt = true;
-
-    if (!this.loginForm.valid) {
-      console.log(this.loginForm.value);
+    if (!this.resetpwdForm.valid){
+      console.log(this.resetpwdForm.value);
     } else {
-      this.authService.signInWithEmail(this.loginForm.value.email, this.loginForm.value.password).then(authService => {
-        this.navCtrl.setRoot(MainPage);
+      this.authService.resetPassword(this.resetpwdForm.value.email).then( authService => {
+        
+        this.loading.dismiss().then(() => {
+          this.translate.get(["AUTH_SUCCESS_RESET_PASSWORD",  "OK_BUTTON_TEXT"]).subscribe(
+            (values) => {
+              let toast = this.toastCtrl.create({
+                message: values.AUTH_SUCCESS_RESET_PASSWORD,
+                duration: 6000,
+                position: 'top',
+                showCloseButton: true,
+                closeButtonText: values.OK_BUTTON_TEXT
+              });
+              toast.present();
+              this.navCtrl.setRoot(LoginPage);
+            });
+        });        
       }, error => { 
         this.loading.dismiss().then(() => {
           var messageErrorTranslated: string;
           this.translate.get([
-            "AUTH_INVALID_EMAIL", "AUTH_USER_DISABLED", "AUTH_USER_NOT_FOUND", "AUTH_WRONG_PASSWORD"
+            "AUTH_INVALID_EMAIL", "AUTH_USER_DISABLED", "AUTH_USER_NOT_FOUND_RESET", "AUTH_WRONG_PASSWORD"
           ]).subscribe(
             (values) => {
               switch (error.code) {
@@ -80,7 +71,7 @@ export class LoginPage {
                   messageErrorTranslated = values.AUTH_USER_DISABLED;
                   break;
                 case 'auth/user-not-found':
-                  messageErrorTranslated = values.AUTH_USER_NOT_FOUND;
+                  messageErrorTranslated = values.AUTH_USER_NOT_FOUND_RESET;
                   break;
                 case 'auth/wrong-password':
                   messageErrorTranslated = values.AUTH_WRONG_PASSWORD;
@@ -113,5 +104,4 @@ export class LoginPage {
       this.loading.present();
     }
   }
-
 }

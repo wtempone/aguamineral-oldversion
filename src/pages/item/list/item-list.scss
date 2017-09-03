@@ -1,0 +1,17 @@
+page-item-list {
+
+    .avatar {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        max-width: 40px;
+        max-height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+      
+      .avatar > img {
+        max-width: 40px;
+        max-height: 40px;
+    }
+}

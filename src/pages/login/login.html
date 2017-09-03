@@ -1,39 +1,26 @@
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>{{ 'LOGIN_TITLE' | translate }}</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content>
-  <form (submit)="doLogin()">
-    <ion-list>
-
-      <ion-item>
-        <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
-        <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
-      </ion-item>
-
-      <!--
-      Want to use a Username instead of an Email? Here you go:
-
-      <ion-item>
-        <ion-label floating>{{ 'USERNAME' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
-      </ion-item>
-      -->
-
-      <ion-item>
-        <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
-        <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
-      </ion-item>
-
-      <div padding>
-        <button ion-button color="primary" block>{{ 'LOGIN_BUTTON' | translate }}</button>
-      </div>
-
-    </ion-list>
+<ion-content padding>
+  <h2>{{ 'LOGIN' | translate }}</h2>
+  <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
+    <ion-item>
+      <ion-label stacked>{{ 'EMAIL' | translate }}</ion-label>
+      <ion-input #email formControlName="email" type="email" placeholder="{{ 'EMAIL_PLACEHOLDER' | translate }}"
+        [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid  && loginForm.controls.email.dirty">
+      <p>{{ 'EMAIL_MESSAGE_INVALID' | translate }}</p>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>{{ 'PASSWORD' | translate }}</ion-label>
+      <ion-input #password formControlName="password" type="password" placeholder="{{ 'PASSWORD_PLACEHOLDER' | translate }}"
+        [class.invalid]="!loginForm.controls.password.valid && (passwordChanged || submitAttempt)"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid  &&  loginForm.controls.password.dirty">
+      <p>{{ 'PASSWORD_MESSAGE_INVALID' | translate }}</p>
+    </ion-item>
+    <button [disabled]="loginForm.invalid" ion-button block type="submit">{{ 'LOGIN' | translate }}</button>
   </form>
+  <button ion-button block (click)="facebookLogin()">{{ 'LOGIN_WHIT_FACEBOOK' | translate }}</button>
+  
+  <button ion-button block clear (click)="register()">{{ 'SIGNUP' | translate }}  </button>
+  <button ion-button block clear (click)="resetPwd()">{{ 'FORGOT_PASSWORD' | translate }}  </button>
 </ion-content>
