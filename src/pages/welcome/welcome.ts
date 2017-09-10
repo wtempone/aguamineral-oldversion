@@ -26,4 +26,7 @@ export class WelcomePage {
   signup() {
     this.modalCtrl.create(SignupPage).present();
   }
+  selectEndereco(endereco) {
+    console.log(endereco);
+  }
 }

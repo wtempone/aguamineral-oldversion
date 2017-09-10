@@ -1,4 +1,4 @@
-<form [formGroup]="formulario" (submit)="onSubmit()" novalidate>
+<form [formGroup]="formulario" novalidate>
   <ion-list>
     <div *ngIf="cadastro || buscaPorEndereco">
       <ion-item>
@@ -74,8 +74,9 @@
     <ion-grid>
       <ion-row>
         <ion-col col-10 col-sm-9 col-md-8 col-lg-7 col-xl-6 class="center-col">
-            <button *ngIf="cadastro" ion-button block (click)="consultaCEP()">{{ 'USE_THIS_ADDRESS' | translate }}</button>
+            <button *ngIf="cadastro" ion-button block color="customColor2" (click)="onSubmit()">{{ 'USE_THIS_ADDRESS' | translate }}</button>
             <button ion-button block (click)="consultaCEP()">{{ (cadastro ? 'NEW_SEARCH' :'SEARCH') | translate }}</button>
+            <button *ngIf="platform.is('cordova')" ion-button block (click)="geolocate()">{{ 'USE_LOCATION' | translate }}</button>
             <button ion-button block clear (click)="togleTipoPesquisa()">{{ (buscaPorEndereco ? 'CEP_KNOW' : 'CEP_UNKNOW') | translate }}</button>
         </ion-col>
       </ion-row>

@@ -20,7 +20,7 @@ export class ConsultaCepService {
         resetaFormCallback(formulario);
 
         return this.http
-          .get(`//viacep.com.br/ws/${cep}/json`)
+          .get(`https://viacep.com.br/ws/${cep}/json`)
           .map(dados => dados.json());
       }
     }
@@ -31,7 +31,7 @@ export class ConsultaCepService {
     if (endereco.Logradouro != '' && endereco.Cidade != '' && endereco.UF != '') {
         resetaFormCallback(formulario);
         return this.http
-          .get(`//viacep.com.br/ws/${endereco.UF}/${endereco.Cidade}/${endereco.Logradouro}/json`)
+          .get(`https://viacep.com.br/ws/${endereco.UF}/${endereco.Cidade}/${endereco.Logradouro}/json`)
           .map(dados => dados.json());
     }
   }

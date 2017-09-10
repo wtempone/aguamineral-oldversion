@@ -15,6 +15,7 @@ import { FacebookModule } from 'ngx-facebook';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+
 // AF2 Settings
 export const firebaseConfig = {
   apiKey: "AIzaSyAu6rPfxKN5Rdef1NUIoeE7BCjQid9G8sQ",
@@ -56,6 +57,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthServiceProvider } from './../providers/auth-service';
+
+import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
+import { GoogleApis } from '../services/consulta-google-apis';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -143,7 +149,11 @@ export function provideSettings(storage: Storage) {
     Facebook,
     DropdownService, 
     ConsultaCepService,
-    MaskShared
+    MaskShared,
+    Geolocation,
+    NativeGeocoder,
+    LocationAccuracy,
+    GoogleApis    
   ]
 })
 export class AppModule { }

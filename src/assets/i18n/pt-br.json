@@ -14,6 +14,7 @@
   "CEP_KNOW": "Buscar por CEP?",
   "CEP_MESSAGE_INVALID": "CEP inválido.",
   "CEP_MESSAGE_INVALID_REQUIRED": "CEP é obrigatório.",
+  "USE_LOCATION": "Usar minha localização",
   
   "NUMERO": "Número",
   "NUMERO_MESSAGE_INVALID": "Número é obrigatório.",
@@ -100,7 +101,7 @@
   "SIGNUP_TITLE": "Cadastre-se",
   "SIGNUP_ERROR": "Não foi possível criar sua conta. Verifique seus dados e tente novamente.",
   "SIGNUP_BUTTON": "Cadastre-se",
-
+  
   "LIST_MASTER_TITLE": "Itens",
 
   "ITEM_CREATE_TITLE": "Novo Item",

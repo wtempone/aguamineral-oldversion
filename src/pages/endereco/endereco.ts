@@ -4,8 +4,10 @@ import { EnderecoPesquisa } from './../../models/endereco-pesquisa.model';
 import { EstadoBr } from './../../models/estado-br.model';
 import { ConsultaCepService } from './../../services/consulta-cep.service';
 import { DropdownService } from './../../services/dropdown.service';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { IonicPage, NavController, NavParams, ToastController, AlertController, Platform } from 'ionic-angular';
+import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 
 import {
   FormGroup,
@@ -20,7 +22,10 @@ import { Http } from '@angular/http';
   selector: 'page-endereco',
   templateUrl: 'endereco.html'
 })
+
 export class EnderecoPage {
+  @Output() selectEndereco = new EventEmitter();
+
   formulario: FormGroup;
   estados: EstadoBr[];
   buscaPorEndereco: boolean;
@@ -34,7 +39,10 @@ export class EnderecoPage {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private translate: TranslateService,
-    public masks: MaskShared
+    private masks: MaskShared,
+    private platform: Platform,
+    private geolocation: Geolocation,
+    private nativeGeocoder: NativeGeocoder
   ) {
     console.log('masks');
     console.log(masks);
@@ -67,7 +75,11 @@ export class EnderecoPage {
   }
 
   onSubmit() {
-
+    if (this.formulario.valid) {
+      this.selectEndereco.emit(this.formulario.value)
+    } else {
+      this.verificaValidacoesForm(this.formulario);
+    }
   }
 
   verificaValidacoesForm(formGroup: FormGroup) {
@@ -131,7 +143,7 @@ export class EnderecoPage {
 
         this.cepService.consultaEndereco(endereco, this.resetaDadosForm, this.formulario)
           .subscribe(dados => {
-            if (!dados) {
+            if (dados.length == 0) {
               return this.populaDadosForm(null);
             }
             if (dados.length == 1) {
@@ -143,7 +155,7 @@ export class EnderecoPage {
                   checked: end === dados[0],
                   classCss: '',
                   type: 'radio',
-                  label: `${end.cep} - ${end.complemento} - ${end.logradouro},${end.cidade}, ${end.UF}`,
+                  label: `${end.cep}, ${end.complemento}, ${end.logradouro}, ${end.bairro}, ${end.localidade}, ${end.uf}`,
                   value: end
                 })
               }
@@ -228,4 +240,33 @@ export class EnderecoPage {
     });
   }
 
+  geolocate() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      console.log(resp.coords.latitude);
+      console.log(resp.coords.longitude);
+      this.getGeoAddress(resp.coords.latitude, resp.coords.longitude)
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
+  }
+
+  getGeoAddress(latitude, longitude) { 
+    this.nativeGeocoder.reverseGeocode(latitude, longitude)
+    .then((result: NativeGeocoderReverseResult) => {
+      let dados = {
+        logradouro: result.thoroughfare,
+        bairro: result.subLocality,
+        localidade: result.locality,
+        uf: this.getSiglaEstado(result.administrativeArea),
+        cep: result.postalCode 
+      }
+      console.log(JSON.stringify(result))
+      return this.populaDadosForm(dados)            
+    })
+    .catch((error: any) => console.log(error));    
+  }
+  getSiglaEstado(nome:string):string {
+    return this.estados.find( x => x.nome == nome).sigla;
+  }
+  
 }
