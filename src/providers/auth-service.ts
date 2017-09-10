@@ -1,8 +1,7 @@
 import { UserService } from './database/services/users';
-import { User } from './database/models/user';
-import { NavController, Platform, ToastController, AlertController, App } from 'ionic-angular';
+//import { User } from './database/models/user';
+import { Platform, ToastController } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook'
-import { LoginPage } from '../pages/login/login';
 
 /*
 ionic cordova plugin add cordova-plugin-facebook4 --variable APP_ID="459416244410212" --variable APP_NAME=
@@ -14,7 +13,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Http } from '@angular/http';
-import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class AuthServiceProvider {
@@ -27,7 +25,6 @@ export class AuthServiceProvider {
     private facebook: Facebook,
     private toastController: ToastController,
     private http: Http,
-    private translate: TranslateService,
     public userService: UserService
     ) { }
 

@@ -1,0 +1,85 @@
+<form [formGroup]="formulario" (submit)="onSubmit()" novalidate>
+  <ion-list>
+    <div *ngIf="cadastro || buscaPorEndereco">
+      <ion-item>
+        <ion-label stacked>{{ 'RUA' | translate }}</ion-label>
+        <ion-input formControlName="rua" type="text" placeholder="{{ 'RUA_PLACEHOLDER' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="verificaValidTouched('rua')">
+        <p class="error-message">{{ 'RUA_MESSAGE_INVALID' | translate }}</p>
+      </ion-item>
+    </div>
+
+    <div *ngIf="cadastro">
+      <ion-item>
+        <ion-label stacked>{{ 'NUMERO' | translate }}</ion-label>
+        <ion-input formControlName="numero" type="number" placeholder="{{ 'NUMERO_PLACEHOLDER' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="verificaValidTouched('numero')">
+        <p class="error-message">{{ 'NUMERO_MESSAGE_INVALID' | translate }}</p>
+      </ion-item>
+    </div>
+
+    <div *ngIf="cadastro">
+      <ion-item>
+        <ion-label stacked>{{ 'COMPLEMENTO' | translate }}</ion-label>
+        <ion-input formControlName="complemento" type="text" placeholder="{{ 'COMPLEMENTO_PLACEHOLDER' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="verificaValidTouched('complemento')">
+        <p class="error-message">{{ 'COMPLEMENTO_MESSAGE_INVALID' | translate }}</p>
+      </ion-item>
+    </div>
+
+    <div *ngIf="cadastro">
+      <ion-item>
+        <ion-label stacked>{{ 'BAIRRO' | translate }}</ion-label>
+        <ion-input formControlName="bairro" type="text" placeholder="{{ 'BAIRRO_PLACEHOLDER' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="verificaValidTouched('bairro')">
+        <p class="error-message">{{ 'BAIRRO_MESSAGE_INVALID' | translate }}</p>
+      </ion-item>
+    </div>
+
+    <div *ngIf="cadastro || buscaPorEndereco">
+      <ion-item *ngIf="cadastro || buscaPorEndereco">
+        <ion-label stacked>{{ 'CIDADE' | translate }}</ion-label>
+        <ion-input formControlName="cidade" type="text" placeholder="{{ 'CIDADE_PLACEHOLDER' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="verificaValidTouched('cidade')">
+        <p class="error-message">{{ 'CIDADE_MESSAGE_INVALID' | translate }}</p>
+      </ion-item>
+    </div>
+    <div *ngIf="cadastro || buscaPorEndereco">
+      <ion-item *ngIf="cadastro || buscaPorEndereco">
+        <ion-label stacked>{{ 'ESTADO' | translate }}</ion-label>
+        <ion-select formControlName="estado" type="text" placeholder="{{ 'ESTADO_PLACEHOLDER' | translate }}">
+          <ion-option *ngFor="let estado of estados" value="{{estado.sigla}}">{{estado.nome}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="verificaValidTouched('estado')">
+        <p class="error-message">{{ 'ESTADO_MESSAGE_INVALID' | translate }}</p>
+      </ion-item>
+    </div>
+    <div *ngIf="cadastro || !buscaPorEndereco">
+
+      <ion-item>
+        <ion-label stacked>{{ 'CEP' | translate }}</ion-label>
+        <ion-input [brmasker]=masks.cep formControlName="cep" type="text" placeholder="{{ 'CEP_PLACEHOLDER' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="verificaValidTouched('cep')">
+          <p *ngIf="formulario.get('cep').hasError('required')" class="error-message">{{ 'CEP_MESSAGE_INVALID_REQUIRED' | translate }}</p>
+          <p *ngIf="formulario.get('cep').hasError('pattern')" class="error-message">{{ 'CEP_MESSAGE_INVALID' | translate }}</p>
+        </ion-item>
+    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-10 col-sm-9 col-md-8 col-lg-7 col-xl-6 class="center-col">
+            <button *ngIf="cadastro" ion-button block (click)="consultaCEP()">{{ 'USE_THIS_ADDRESS' | translate }}</button>
+            <button ion-button block (click)="consultaCEP()">{{ (cadastro ? 'NEW_SEARCH' :'SEARCH') | translate }}</button>
+            <button ion-button block clear (click)="togleTipoPesquisa()">{{ (buscaPorEndereco ? 'CEP_KNOW' : 'CEP_UNKNOW') | translate }}</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-list>
+</form>

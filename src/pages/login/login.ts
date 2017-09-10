@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, AlertController, NavParams, LoadingController, ToastController, ModalController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { MainPage } from '../../pages/pages';
@@ -12,12 +12,6 @@ import { WelcomePage } from './../welcome/welcome';
 import { SignupPage } from '../signup/signup';
 import { ResetpwdPage } from '../resetpwd/resetpwd';
 
-/*
-  Generated class for the Login page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -31,13 +25,14 @@ export class LoginPage {
   loading: any;
 
   constructor(public navCtrl: NavController,
-    public authService: AuthServiceProvider,
-    public navParams: NavParams,
-    public formBuilder: FormBuilder,
-    public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController,
-    public toastCtrl: ToastController,    
-    public translate: TranslateService) {
+    private authService: AuthServiceProvider,
+    private navParams: NavParams,
+    private modalCtrl: ModalController,
+    private formBuilder: FormBuilder,
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,    
+    private translate: TranslateService) {
 
     let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 
@@ -47,11 +42,13 @@ export class LoginPage {
     });
   }
   register(){
-    this.navCtrl.push(SignupPage);
+    this.navCtrl.pop();
+    this.modalCtrl.create(SignupPage).present();
   }
 
   resetPwd() {
-    this.navCtrl.push(ResetpwdPage);
+    this.navCtrl.pop();
+    this.modalCtrl.create(ResetpwdPage).present();
   }
   facebookLogin() {
     this.authService.signInWithFacebook();

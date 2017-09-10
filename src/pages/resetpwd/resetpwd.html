@@ -1,26 +1,21 @@
-<ion-header>
-    
-      <ion-navbar>
-        <ion-title>{{ 'RESET_PASSWORD' | translate }}</ion-title>
-      </ion-navbar>
-    
-    </ion-header>
-    
-    
-    <ion-content padding>
-      <h2>{{ 'RESET_PASSWORD' | translate }}</h2>
-      <form [formGroup]="resetpwdForm" (submit)="resetPwd()" novalidate>
-        <ion-item>
-          <ion-label stacked>{{ 'EMAIL' | translate }}</ion-label>
-          <ion-input #email formControlName="email" type="email" 
-            placeholder="{{ EMAIL_PLACEHOLDER | translate }}"
-            [class.invalid]="!resetpwdForm.controls.email.valid &&  resetpwdForm.controls.email.dirty"></ion-input>
-        </ion-item>
-        <ion-item class="error-message" *ngIf="!resetpwdForm.controls.email.valid  &&  resetpwdForm.controls.email.dirty">
-          <p>{{ 'EMAIL_MESSAGE_INVALID' | translate }}</p>
-        </ion-item>
-        <button [disabled]="resetpwdForm.invalid" ion-button block type="submit">
+<ion-title>
+  {{ 'RESET_PASSWORD' | translate }}
+</ion-title>
+<ion-content padding>
+  <h2>{{ 'RESET_PASSWORD' | translate }}</h2>
+  <form [formGroup]="resetpwdForm" (submit)="resetPwd()" novalidate>
+    <ion-item>
+      <ion-label stacked>{{ 'EMAIL' | translate }}</ion-label>
+      <ion-input #email formControlName="email" type="email" placeholder="{{ EMAIL_PLACEHOLDER | translate }}" [class.invalid]="!resetpwdForm.controls.email.valid &&  resetpwdForm.controls.email.dirty"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!resetpwdForm.controls.email.valid  &&  resetpwdForm.controls.email.dirty">
+      <p>{{ 'EMAIL_MESSAGE_INVALID' | translate }}</p>
+    </ion-item>
+    <button [disabled]="resetpwdForm.invalid" ion-button block type="submit">
             {{ 'RESET_PASSWORD_SENT' | translate }}
         </button>
-      </form>
-    </ion-content>
+  </form>
+
+  <button ion-button block clear (click)="register()">{{ 'SIGNUP' | translate }}  </button>
+  <button ion-button block clear (click)="login()">{{ 'LOGIN' | translate }}  </button>
+</ion-content>

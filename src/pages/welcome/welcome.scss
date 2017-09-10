@@ -1,7 +1,19 @@
 page-welcome {
+  ion-content {
+    background: url('../assets/img/splashbg.png') no-repeat center center fixed;    
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;      
+  }
+  .center-col {
+    margin: auto;
+    padding: 0;
+    
+  }
   .splash-bg {
     position: relative;
-    background: url('../assets/img/splashbg.png') no-repeat transparent;
+    //background: url('../assets/img/splashbg.png') no-repeat transparent;
     background-size: cover;
     height: 45%;
     z-index: 1;
@@ -17,7 +29,7 @@ page-welcome {
   .splash-info {
     position: relative;
     z-index: 2;
-    margin-top: -64px;
+    margin-top: 64px;
     text-align: center;
   }
   .splash-logo {
@@ -31,7 +43,7 @@ page-welcome {
     font-size: 18px;
     font-weight: bold;
     max-width: 80%;
-    margin: auto;
+    margin: 20px auto auto auto;
   }
   button.login {
     margin-top: 25px;

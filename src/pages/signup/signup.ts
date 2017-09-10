@@ -1,6 +1,7 @@
+import { LoginPage } from './../login/login';
 
 import { Component } from '@angular/core';
-import { NavController, AlertController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, AlertController, NavParams, LoadingController, ToastController, ModalController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { MainPage } from '../../pages/pages';
@@ -31,13 +32,14 @@ export class SignupPage {
   loading: any;
 
   constructor(public navCtrl: NavController,
-    public authService: AuthServiceProvider,
-    public navParams: NavParams,
-    public formBuilder: FormBuilder,
-    public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController,
-    public toastCtrl: ToastController,
-    public translate: TranslateService) {
+    private authService: AuthServiceProvider,
+    private modalCtrl: ModalController,
+    private navParams: NavParams,
+    private formBuilder: FormBuilder,
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
+    private translate: TranslateService) {
 
     let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 
@@ -48,11 +50,19 @@ export class SignupPage {
     });
   }
   register() {
-    this.navCtrl.push(SignupPage);
+    this.navCtrl.pop()
+    this.modalCtrl.create(SignupPage).present();
   }
 
   resetPwd() {
-    this.navCtrl.push(ResetpwdPage);
+    this.navCtrl.pop();
+    this.modalCtrl.create(ResetpwdPage).present();
+  }
+
+  goToLogin() {
+    this.navCtrl.pop();
+    this.modalCtrl.create(LoginPage).present();
+    
   }
   loginUser() {
 

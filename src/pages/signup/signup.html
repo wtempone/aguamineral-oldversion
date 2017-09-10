@@ -1,32 +1,25 @@
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>{{ 'SIGNUP_TITLE' | translate }}</ion-title>
-  </ion-navbar>
-
-</ion-header>
+<ion-title>
+  {{ 'SIGNUP_TITLE' | translate }}
+</ion-title>
 
 <ion-content padding>
   <h2>{{ 'SIGNUP_TITLE' | translate }}</h2>
   <form [formGroup]="signupForm" (submit)="doSignup()" novalidate>
-      <ion-item>
-          <ion-label stacked>{{ 'NAME' | translate }}</ion-label>
-          <ion-input #nome formControlName="nome" type="nome" placeholder="{{ 'NAME_PLACEHOLDER' | translate }}"
-          [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty"></ion-input>
-      </ion-item>
-      
+    <ion-item>
+      <ion-label stacked>{{ 'NAME' | translate }}</ion-label>
+      <ion-input #nome formControlName="nome" type="nome" placeholder="{{ 'NAME_PLACEHOLDER' | translate }}" [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty"></ion-input>
+    </ion-item>
+
     <ion-item>
       <ion-label stacked>{{ 'EMAIL' | translate }}</ion-label>
-      <ion-input #email formControlName="email" type="email" placeholder="{{ 'EMAIL_PLACEHOLDER' | translate }}"
-        [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty"></ion-input>
+      <ion-input #email formControlName="email" type="email" placeholder="{{ 'EMAIL_PLACEHOLDER' | translate }}" [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty"></ion-input>
     </ion-item>
     <ion-item class="error-message" *ngIf="!signupForm.controls.email.valid  && signupForm.controls.email.dirty">
       <p>{{ 'EMAIL_MESSAGE_INVALID' | translate }}</p>
     </ion-item>
     <ion-item>
       <ion-label stacked>{{ 'PASSWORD' | translate }}</ion-label>
-      <ion-input #password formControlName="password" type="password" placeholder="{{ 'PASSWORD_PLACEHOLDER' | translate }}"
-        [class.invalid]="!signupForm.controls.password.valid && (passwordChanged || submitAttempt)"></ion-input>
+      <ion-input #password formControlName="password" type="password" placeholder="{{ 'PASSWORD_PLACEHOLDER' | translate }}" [class.invalid]="!signupForm.controls.password.valid && (passwordChanged || submitAttempt)"></ion-input>
     </ion-item>
     <ion-item class="error-message" *ngIf="!signupForm.controls.password.valid  &&  signupForm.controls.password.dirty">
       <p>{{ 'PASSWORD_MESSAGE_INVALID' | translate }}</p>

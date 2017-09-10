@@ -29,8 +29,10 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
-);
+  dark:       #222,
+  customColor1:       #0062c7,
+  customColor2:       #e06637,
+  );
 
 
 // App iOS Variables
@@ -77,3 +79,7 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+.error-message {
+  color: #f65555 !important
+}

@@ -1,13 +1,29 @@
+<ion-header>
+
+  <ion-navbar color="customColor1">
+    <ion-title>{{ 'APP_NAME' | translate }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="signup()">{{ 'SIGNUP' | translate }}</button>
+      <button ion-button icon-only (click)="login()">{{ 'LOGIN' | translate }}</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
 <ion-content scroll="false">
-  <div class="splash-bg"></div>
   <div class="splash-info">
     <div class="splash-logo"></div>
     <div class="splash-intro">
       {{ 'WELCOME_INTRO' | translate }}
     </div>
-  </div>
-  <div padding>
-    <button ion-button block (click)="signup()" class="signup">{{ 'SIGNUP' | translate }}</button>
-    <button ion-button block (click)="login()" class="login">{{ 'LOGIN' | translate }}</button>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 class="center-col">
+          <page-endereco></page-endereco>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>
+<ion-footer color="customColor1">
+  <button ion-button block (click)="signup()" color="customColor1">{{ 'SIGNUP_DISTRIBUTOR' | translate }}</button>
+</ion-footer>

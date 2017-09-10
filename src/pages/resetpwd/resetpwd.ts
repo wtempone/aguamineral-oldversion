@@ -1,8 +1,9 @@
+import { SignupPage } from './../signup/signup';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthServiceProvider } from './../../providers/auth-service';
 import { LoginPage } from './../login/login';
 import { Component } from '@angular/core';
-import { NavController, AlertController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, AlertController, NavParams, LoadingController, ToastController, ModalController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 
 /*
@@ -23,6 +24,7 @@ export class ResetpwdPage {
   loading: any;
 
   constructor(public navCtrl: NavController, 
+    public modalCtrl: ModalController, 
     public authService: AuthServiceProvider, 
     public navParams: NavParams, 
     public formBuilder: FormBuilder,
@@ -35,7 +37,15 @@ export class ResetpwdPage {
       email: ['', Validators.compose([Validators.required, Validators.pattern(EMAIL_REGEXP)])]
     });
   }
+  register(){
+    this.navCtrl.pop();
+    this.modalCtrl.create(SignupPage).present();
+  }
 
+  login(){
+    this.navCtrl.pop();
+    this.modalCtrl.create(LoginPage).present();
+  }
   resetPwd() {
     if (!this.resetpwdForm.valid){
       console.log(this.resetpwdForm.value);

@@ -1,3 +1,8 @@
+import { BrMaskerModule } from 'brmasker-ionic-3';
+import { MaskShared } from './../shared/masks';
+import { DropdownService } from './../services/dropdown.service';
+import { ConsultaCepService } from './../services/consulta-cep.service';
+import { EnderecoPage } from './../pages/endereco/endereco';
 // Modulos Base
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -86,7 +91,8 @@ export function provideSettings(storage: Storage) {
     TabsPage,
     TutorialPage,
     SettingsPage,   
-    WelcomePage
+    WelcomePage,
+    EnderecoPage
   ],
   imports: [
     BrowserModule,
@@ -103,7 +109,8 @@ export function provideSettings(storage: Storage) {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule, 
     AngularFireAuthModule,
-    FacebookModule.forRoot()
+    FacebookModule.forRoot(),
+    BrMaskerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -118,7 +125,8 @@ export function provideSettings(storage: Storage) {
     TabsPage,
     TutorialPage,
     SettingsPage,   
-    WelcomePage
+    WelcomePage,
+    EnderecoPage
   ],
   providers: [
     Api,
@@ -132,7 +140,10 @@ export function provideSettings(storage: Storage) {
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthServiceProvider,
-    Facebook
+    Facebook,
+    DropdownService, 
+    ConsultaCepService,
+    MaskShared
   ]
 })
 export class AppModule { }

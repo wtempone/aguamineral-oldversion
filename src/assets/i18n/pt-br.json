@@ -1,11 +1,53 @@
 {
+  "APP_NAME":"Água Mineral  ", 
   "BACK_BUTTON_TEXT" : "Voltar",
   "CLOSE_BUTTON_TEXT" : "Fechar",
   "OK_BUTTON_TEXT" : "Ok",
-  
+  "SEARCH":"Buscar",
+  "NEW_SEARCH":"Nova Busca",
   "NAME": "Nome",
-  "NAME_PLACEHOLDER": "Digite seu nome",
+  "SIGNUP_DISTRIBUTOR":"Cadastre sua distribuidora!",
+
+  "CEP": "CEP",
+  "CEP_PLACEHOLDER": "Digite seu CEP",
+  "CEP_UNKNOW": "Não sabe o CEP?",
+  "CEP_KNOW": "Buscar por CEP?",
+  "CEP_MESSAGE_INVALID": "CEP inválido.",
+  "CEP_MESSAGE_INVALID_REQUIRED": "CEP é obrigatório.",
   
+  "NUMERO": "Número",
+  "NUMERO_MESSAGE_INVALID": "Número é obrigatório.",
+  "NUMERO_PLACEHOLDER": "Digite o número",
+
+  "COMPLEMENTO": "Complemento",
+  "COMPLEMENTO_MESSAGE_INVALID": "Complemento é obrigatório.",
+  "COMPLEMENTO_PLACEHOLDER": "Digite o Complemento",
+
+  "RUA": "Rua",
+  "RUA_MESSAGE_INVALID": "Rua é obrigatório.",
+  "RUA_PLACEHOLDER": "Digite a rua",
+
+  "BAIRRO": "Bairro",
+  "BAIRRO_MESSAGE_INVALID": "Bairrro é obrigatório.",
+  "BAIRRO_PLACEHOLDER": "Digite o bairro",
+  
+  "CIDADE": "Cidade",
+  "CIDADE_MESSAGE_INVALID": "Cidade é obrigatório.",
+  "CIDADE_PLACEHOLDER": "Digite a cidade",
+ 
+  "ESTADO": "Estado",
+  "ESTADO_MESSAGE_INVALID": "Estado é obrigatório.",
+  "ESTADO_PLACEHOLDER": "Digite o estado",
+
+  "USE_THIS_ADDRESS": "Usar este endereço",
+  
+  "ADDRESS_NOT_FOUND": "CEP não encontado, melhore seus critérios de pesquisa.",
+   "CEP_NOT_FOUND" : "Endereço não encontado para o CEP informado.",
+
+
+   "ADDRESS_SELECTION": "Selecione um endereço",
+
+  "NAME_PLACEHOLDER": "Digite seu nome",
   "EMAIL": "Email",
   "EMAIL_PLACEHOLDER": "Digite seu email",
   "USERNAME": "Nome de Usuário",
@@ -38,7 +80,7 @@
 
   "TUTORIAL_SLIDE4_TITLE": "Pronto para Usar?",
 
-  "WELCOME_INTRO" : "O ponto de partida para seu próximo app feito no Ionic",
+  "WELCOME_INTRO" : "Entrega de água mineral pelo celular",
 
   "SETTINGS_TITLE": "Configurações",
   "SETTINGS_OPTION1": "Opção 1",
