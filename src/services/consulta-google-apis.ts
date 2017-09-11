@@ -25,8 +25,7 @@ export class GoogleApis {
       ${endereco.rua}+${endereco.numero},+
       ${endereco.bairro}+
       ${endereco.cidade}+
-      ${endereco.estado}+
-      ${endereco.uf}&language=pt-BR&key=AIzaSyDvkH1UJdEJIqwuk_oORlsdaJHBuHRn9lE`)
+      ${endereco.estado}&language=pt-BR&key=AIzaSyDvkH1UJdEJIqwuk_oORlsdaJHBuHRn9lE`)
       .map(dados => dados.json());
   }
 

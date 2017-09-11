@@ -1,3 +1,4 @@
+import { GoogleApis } from './../../services/consulta-google-apis';
 import { MaskShared } from './../../shared/masks';
 import { TranslateService } from '@ngx-translate/core';
 import { EnderecoPesquisa } from './../../models/endereco-pesquisa.model';
@@ -42,7 +43,8 @@ export class EnderecoPage {
     private masks: MaskShared,
     private platform: Platform,
     private geolocation: Geolocation,
-    private nativeGeocoder: NativeGeocoder
+    private nativeGeocoder: NativeGeocoder,
+    private googleApis: GoogleApis
   ) {
     console.log('masks');
     console.log(masks);
@@ -74,10 +76,38 @@ export class EnderecoPage {
 
   }
 
-  onSubmit() {
+  setAddress() {
     if (this.formulario.valid) {
-      this.selectEndereco.emit(this.formulario.value)
-    } else {
+      this.googleApis.geocodeingEndereco(this.formulario.value).subscribe(dadosGoogle => {
+        console.log(dadosGoogle);
+        if (dadosGoogle.status == "OK") {
+          let dados =  {
+            cep: this.formulario.get('cep').value,
+            numero: this.formulario.get('numero').value,
+            complemento: this.formulario.get('complemento').value,
+            rua: this.formulario.get('rua').value,
+            bairro: this.formulario.get('bairro').value,
+            cidade: this.formulario.get('cidade').value,
+            estado: this.formulario.get('estado').value,
+            latitude: dadosGoogle.results[0].geometry.location.lat,
+            longitude: dadosGoogle.results[0].geometry.location.lng
+          }
+          this.selectEndereco.emit(dados);
+        } else {
+          this.translate.get("ADDRESS_VALIDATION_ERROR").subscribe(
+            (value) => {
+              let toast = this.toastCtrl.create({
+                message: value,
+                duration: 3000,
+                position: 'top'
+              }); 
+              toast.present();
+            });          
+          
+        }
+
+      })
+    } else { 
       this.verificaValidacoesForm(this.formulario);
     }
   }

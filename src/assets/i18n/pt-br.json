@@ -15,6 +15,7 @@
   "CEP_MESSAGE_INVALID": "CEP inválido.",
   "CEP_MESSAGE_INVALID_REQUIRED": "CEP é obrigatório.",
   "USE_LOCATION": "Usar minha localização",
+  "ADDRESS_VALIDATION_ERROR": "Erro na validação do endereço. Revise seus dados e tente novamente.",
   
   "NUMERO": "Número",
   "NUMERO_MESSAGE_INVALID": "Número é obrigatório.",
